@@ -6,7 +6,7 @@ bp = Blueprint("board", __name__)
 @bp.route("/")
 def list():
     db = get_db()
-
+    #likes = db.IntegerField(default=0)
     posts = db.execute("SELECT * FROM post ORDER BY created DESC").fetchall()
 
     return render_template("board/list.html", posts=posts)
@@ -19,7 +19,13 @@ def add():
         title = request.form["title"]
         description = request.form["description"]
         color = request.form["color"]
-
+        #likes = request.form["likes"]
+        if request.args.get("vote"):
+            post.likes = post.likes + 1
+            post.save()
+            #likes = request.form["likes"]
+            return redirect("/add/{post_id}".format(post_id=post_id))
+        
         db = get_db()
         db.execute(
             "INSERT INTO post (title, description, color) VALUES (?, ?, ?)",

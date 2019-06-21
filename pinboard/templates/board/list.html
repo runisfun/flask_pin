@@ -2,7 +2,7 @@
 
 {% block nav %}
 <li class="nav-item">
-    <a class="nav-link" href="{{ url_for('board.add') }}">Add Entry</a>
+    <a class="nav-link" href="{{ url_for('board.add') }}">Add Post</a>
 </li>
 {% endblock %}
 
@@ -14,6 +14,10 @@
                 <div class="card-header">{{ post.title }}</div>
                 <div class="card-body">
                     <p class="card-text">{{ post.description }}</p>
+				    
+	                    <i class="fa fa-star-o"></i> {{ post.likes }} 
+	                    <button class="btn btn-block btn-primary"><i class="fa fa-thumbs-up">Like (0)</i> </button>
+                    </a>
                 </div>
             </div>
         </div>
